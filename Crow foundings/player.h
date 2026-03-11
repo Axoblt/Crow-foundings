@@ -1,19 +1,25 @@
 #pragma once
+#include <SFML/Graphics.hpp>
+#include <memory>
 
-class player
-{
+class player {
 private:
-    float y;
-    float velocity;
+    float x, y, velocity, gravity, jumpForce;
 
-    float gravity;
-    float jumpForce;
+    sf::Texture spriteSheet; 
+    std::unique_ptr<sf::Sprite> sprite;
+
+    float animationTimer{ 0.f };
+    int currentFrame{ 0 };
+    const float frameDuration{ 0.1f };
+    bool isSpacePressed = false;
+
+    const int frameWidth = 2050;
+    const int frameHeight = 2050;
 
 public:
     player();
-
     void update(float dt);
-    void jump();
-
-    float getY() const;
+    void handleEvent(const sf::Event& event);
+    void draw(sf::RenderTarget& target) const;
 };
