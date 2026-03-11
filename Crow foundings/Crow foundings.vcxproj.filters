@@ -19,6 +19,12 @@
     <Filter Include="Fichiers d%27en-tête\Entity">
       <UniqueIdentifier>{b080c1a4-746f-4168-9dfd-427087ee3e56}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Obstacle">
+      <UniqueIdentifier>{f0589d09-d2ee-40f7-bed4-1cf55a6a4bf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Obstacle">
+      <UniqueIdentifier>{1f1587ec-5c6a-4ed8-912d-b9a882696e16}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -27,10 +33,16 @@
     <ClCompile Include="player.cpp">
       <Filter>Fichiers sources\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="obstacle.cpp">
+      <Filter>Fichiers sources\Obstacle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="player.h">
       <Filter>Fichiers d%27en-tête\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="obstacle.h">
+      <Filter>Fichiers d%27en-tête\Obstacle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

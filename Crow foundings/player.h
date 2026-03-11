@@ -22,4 +22,10 @@ public:
     void update(float dt);
     void handleEvent(const sf::Event& event);
     void draw(sf::RenderTarget& target) const;
+
+    sf::FloatRect getBounds() const {
+        if (sprite) return sprite->getGlobalBounds();
+        return sf::FloatRect({ 0, 0 }, { 0, 0 });
+    }
+
 };
