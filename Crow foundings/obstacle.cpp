@@ -1,5 +1,6 @@
 #include "obstacle.h"
 
+const float GAP_SIZE = 100.f;
 
 obstacle::obstacle(float startX, float gapY, const sf::Texture& texture)
     : topSprite(texture), bottomSprite(texture), x(startX), gapY(gapY) {
@@ -7,18 +8,22 @@ obstacle::obstacle(float startX, float gapY, const sf::Texture& texture)
     topSprite.setScale({ 0.3f, 0.5f });
     bottomSprite.setScale({ 0.3f, 0.5f });
 
+  
+    float spriteHeight = topSprite.getGlobalBounds().size.y;
 
-    float gapSize = 350.f; // Réduis cette valeur pour rendre le passage plus difficile
-
-    topSprite.setPosition({ x, gapY - 600.f }); // Ajuste ces valeurs pour que le haut soit collé en haut
-    bottomSprite.setPosition({ x, gapY + gapSize });
+    topSprite.setPosition({ x, gapY - (GAP_SIZE / 2.f) - spriteHeight });
+    bottomSprite.setPosition({ x, gapY + (GAP_SIZE / 2.f) });
 }
+
 void obstacle::update(float dt) {
     x -= speed * dt;
-    topSprite.setPosition({ x, gapY - 500.f });
-    bottomSprite.setPosition({ x, gapY + 100.f });
-}
+    float spriteHeight = topSprite.getGlobalBounds().size.y;
 
+    // Aligne strictement sur le bord haut (-50 pour un léger débordement visuel)
+    topSprite.setPosition({ x, -50.f });
+    // Aligne strictement sur le bord bas (1080 - hauteur + 50)
+    bottomSprite.setPosition({ x, 1080.f - spriteHeight + 50.f });
+}
 void obstacle::draw(sf::RenderTarget& target) const {
     target.draw(topSprite);
     target.draw(bottomSprite);

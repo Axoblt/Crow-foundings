@@ -14,7 +14,56 @@ public:
     obstacle(float startX, float gapY, const sf::Texture& texture);
     void update(float dt);
     void draw(sf::RenderTarget& target) const;
+
     bool isOffScreen() const { return x < -200.f; }
-    sf::FloatRect getTopBounds() const { return topSprite.getGlobalBounds(); }
-    sf::FloatRect getBottomBounds() const { return bottomSprite.getGlobalBounds(); }
+
+    sf::FloatRect getTopBounds() const {
+        sf::FloatRect rect = topSprite.getGlobalBounds();
+
+        // Définis ici tes valeurs manuelles
+        float customWidth = 100.0f;   // Ta largeur désirée
+        float customHeight = 450.0f; // Ta hauteur désirée
+
+        // Décalage pour centrer la hitbox sur le sprite
+        float offsetX = (rect.size.x - customWidth) / 1.82f;
+        float offsetY = 70.0f; // Si tu veux qu'elle commence tout en haut
+
+        return {
+            {rect.position.x + offsetX, rect.position.y + offsetY},
+            {customWidth, customHeight}
+        };
+    }
+
+    sf::FloatRect getBottomBounds() const {
+        sf::FloatRect rect = bottomSprite.getGlobalBounds();
+
+        float customWidth = 100.0f;
+        float customHeight = 450.0f;
+
+        float offsetX = (rect.size.x - customWidth) / 1.82f;
+        // Ici on décale vers le bas du sprite (hauteur totale - hauteur hitbox)
+        float offsetY = 70.0f; // Si tu veux qu'elle commence tout en haut
+
+        return {
+            {rect.position.x + offsetX, rect.position.y + offsetY},
+            {customWidth, customHeight}
+        };
+    }
+
+    void drawDebug(sf::RenderTarget& target) const {
+        sf::RectangleShape hbTop(getTopBounds().size);
+        hbTop.setPosition(getTopBounds().position);
+        hbTop.setFillColor(sf::Color::Transparent);
+        hbTop.setOutlineColor(sf::Color::Red);
+        hbTop.setOutlineThickness(2.f);
+
+        sf::RectangleShape hbBottom(getBottomBounds().size);
+        hbBottom.setPosition(getBottomBounds().position);
+        hbBottom.setFillColor(sf::Color::Transparent);
+        hbBottom.setOutlineColor(sf::Color::Red);
+        hbBottom.setOutlineThickness(2.f);
+
+        target.draw(hbTop);
+        target.draw(hbBottom);
+    }
 };

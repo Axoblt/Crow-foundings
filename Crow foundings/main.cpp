@@ -3,54 +3,72 @@
 #include "obstacle.h"
 #include <vector>
 #include <iostream>
+#include <cstdlib> // Pour rand()
 
 int main() {
     sf::RenderWindow window(sf::VideoMode({ 1920, 1080 }), "Flappy Crow Modern");
-    player crow;
+    window.setFramerateLimit(60);
 
+    player crow;
     sf::Texture statueTex;
-    if (!statueTex.loadFromFile("Assets/statut_1_WIP.png")) {
-        return -1;
-    }
+    if (!statueTex.loadFromFile("Assets/statut_1_WIP.png")) return -1;
 
     std::vector<obstacle> obstacles;
     sf::Clock spawnClock;
     sf::Clock dtClock;
-    sf::Clock gameStartClock;
+    bool isDead = false;
 
     while (window.isOpen()) {
         float dt = dtClock.restart().asSeconds();
 
         while (const std::optional event = window.pollEvent()) {
             if (event->is<sf::Event::Closed>()) window.close();
-            crow.handleEvent(*event);
-        }
 
-        crow.update(dt);
-
-        if (spawnClock.getElapsedTime().asSeconds() > 2.0f) {
-            obstacles.emplace_back(1920.f, 500.f, statueTex);
-            spawnClock.restart();
-        }
-
-        for (auto it = obstacles.begin(); it != obstacles.end();) {
-            it->update(dt);
-
-            if (gameStartClock.getElapsedTime().asSeconds() > 2.0f) {
-                if (crow.getBounds().findIntersection(it->getTopBounds()).has_value() ||
-                    crow.getBounds().findIntersection(it->getBottomBounds()).has_value()) {
-                    std::cout << "Collision ! Game Over!" << std::endl;
-                    //window.close();
+            if (!isDead) {
+                crow.handleEvent(*event);
+            }
+            else {
+                if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
+                    if (keyPressed->code == sf::Keyboard::Key::Space) {
+                        isDead = false;
+                        auto crow = player();
+                        obstacles.clear();
+                        spawnClock.restart();
+                    }
                 }
             }
+        }
 
-            if (it->isOffScreen()) it = obstacles.erase(it);
-            else ++it;
+        if (!isDead) {
+            crow.update(dt);
+            if (spawnClock.getElapsedTime().asSeconds() > 2.0f) {
+                // Génération aléatoire entre 200 et 800
+                float randomY = 200.f + static_cast<float>(rand() % 600);
+                obstacles.emplace_back(2000.f, randomY, statueTex);
+                spawnClock.restart();
+            }
+
+            for (auto it = obstacles.begin(); it != obstacles.end();) {
+                it->update(dt);
+                if (crow.getBounds().findIntersection(it->getTopBounds()).has_value() ||
+                    crow.getBounds().findIntersection(it->getBottomBounds()).has_value() ||
+                    crow.getBounds().position.y > 1080.f || crow.getBounds().position.y < -100.f)
+                {
+                    isDead = true;
+                }
+                if (it->isOffScreen()) it = obstacles.erase(it);
+                else ++it;
+            }
         }
 
         window.clear(sf::Color(20, 20, 30));
-        for (const auto& obs : obstacles) obs.draw(window);
+        for (auto& obs : obstacles) {
+            obs.draw(window);
+            obs.drawDebug(window);
+        }
         crow.draw(window);
+        crow.drawDebug(window);
         window.display();
     }
+    return 0;
 }

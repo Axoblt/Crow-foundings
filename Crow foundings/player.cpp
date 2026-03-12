@@ -12,7 +12,7 @@ player::player() : x(400.f), y(400.f), velocity(0.f), gravity(1200.f), jumpForce
 
     sprite->setTextureRect(sf::IntRect({ 0, 0 }, { frameWidth, frameHeight }));
     sprite->setOrigin({ frameWidth / 2.f, frameHeight / 2.f });
-    sprite->setScale({ 0.1f, 0.1f });
+    sprite->setScale({ 0.08f, 0.08f });
 }
 
 void player::update(float dt) {
