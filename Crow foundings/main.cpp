@@ -3,7 +3,7 @@
 #include "obstacle.h"
 #include <vector>
 #include <iostream>
-#include <cstdlib> // Pour rand()
+#include <cstdlib> 
 
 int main() {
     sf::RenderWindow window(sf::VideoMode({ 1920, 1080 }), "Flappy Crow Modern");
@@ -42,7 +42,6 @@ int main() {
         if (!isDead) {
             crow.update(dt);
             if (spawnClock.getElapsedTime().asSeconds() > 2.0f) {
-                // Génération aléatoire entre 200 et 800
                 float randomY = 200.f + static_cast<float>(rand() % 600);
                 obstacles.emplace_back(2000.f, randomY, statueTex);
                 spawnClock.restart();

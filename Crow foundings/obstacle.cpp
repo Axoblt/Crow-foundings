@@ -19,9 +19,8 @@ void obstacle::update(float dt) {
     x -= speed * dt;
     float spriteHeight = topSprite.getGlobalBounds().size.y;
 
-    // Aligne strictement sur le bord haut (-50 pour un léger débordement visuel)
     topSprite.setPosition({ x, -50.f });
-    // Aligne strictement sur le bord bas (1080 - hauteur + 50)
+
     bottomSprite.setPosition({ x, 1080.f - spriteHeight + 50.f });
 }
 void obstacle::draw(sf::RenderTarget& target) const {

@@ -5,7 +5,6 @@
 player::player() : x(400.f), y(400.f), velocity(0.f), gravity(1200.f), jumpForce(-500.f) {
 
     if (!spriteSheet.loadFromFile("Assets/spritesheet_vol_corbeau_Skin_1.png")) {
-        std::cerr << "Erreur : Fichier spritesheet introuvable" << std::endl;
     }
 
     sprite = std::make_unique<sf::Sprite>(spriteSheet);

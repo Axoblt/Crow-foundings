@@ -18,7 +18,7 @@ private:
 
 public:
     player();
-    // Ces deux lignes règlent l'erreur E1776
+
     player(player&&) noexcept = default;
     player& operator=(player&&) noexcept = default;
 
@@ -30,7 +30,6 @@ public:
         if (sprite) {
             sf::FloatRect rect = sprite->getGlobalBounds();
 
-            // Facteur de réduction (ex: 0.2f = réduit de 20% sur chaque bord)
             float reduction = 0.28f;
 
             sf::Vector2f newSize(rect.size.x * (1.0f - reduction * 2), rect.size.y * (1.0f - reduction * 2));

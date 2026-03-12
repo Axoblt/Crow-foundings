@@ -10,7 +10,7 @@ private:
     static constexpr float speed = 300.f;
 
 public:
-    // On ne passe pas la texture ici pour éviter le problème de constructeur
+
     obstacle(float startX, float gapY, const sf::Texture& texture);
     void update(float dt);
     void draw(sf::RenderTarget& target) const;
@@ -20,13 +20,13 @@ public:
     sf::FloatRect getTopBounds() const {
         sf::FloatRect rect = topSprite.getGlobalBounds();
 
-        // Définis ici tes valeurs manuelles
-        float customWidth = 100.0f;   // Ta largeur désirée
-        float customHeight = 450.0f; // Ta hauteur désirée
+   
+        float customWidth = 100.0f;   // largeur 
+        float customHeight = 450.0f; //  hauteur 
 
-        // Décalage pour centrer la hitbox sur le sprite
+
         float offsetX = (rect.size.x - customWidth) / 1.82f;
-        float offsetY = 70.0f; // Si tu veux qu'elle commence tout en haut
+        float offsetY = 70.0f; 
 
         return {
             {rect.position.x + offsetX, rect.position.y + offsetY},
@@ -41,8 +41,8 @@ public:
         float customHeight = 450.0f;
 
         float offsetX = (rect.size.x - customWidth) / 1.82f;
-        // Ici on décale vers le bas du sprite (hauteur totale - hauteur hitbox)
-        float offsetY = 70.0f; // Si tu veux qu'elle commence tout en haut
+ 
+        float offsetY = 70.0f; 
 
         return {
             {rect.position.x + offsetX, rect.position.y + offsetY},
