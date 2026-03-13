@@ -7,7 +7,7 @@
 #include <cstdlib> 
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode({ 1920, 1080 }), "Flappy Crow Modern");
+    sf::RenderWindow window(sf::VideoMode({ 1920, 1080 }), "Flappy Crow");
     window.setFramerateLimit(60);
 
     Background_scroll background;  
