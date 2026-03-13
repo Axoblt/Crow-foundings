@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "player.h"
 #include "obstacle.h"
+#include "Background_scroll.h" 
 #include <vector>
 #include <iostream>
 #include <cstdlib> 
@@ -9,6 +10,7 @@ int main() {
     sf::RenderWindow window(sf::VideoMode({ 1920, 1080 }), "Flappy Crow Modern");
     window.setFramerateLimit(60);
 
+    Background_scroll background;  
     player crow;
     sf::Texture statueTex;
     if (!statueTex.loadFromFile("Assets/statut_1_WIP.png")) return -1;
@@ -31,7 +33,7 @@ int main() {
                 if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
                     if (keyPressed->code == sf::Keyboard::Key::Space) {
                         isDead = false;
-                        auto crow = player();
+                        auto crow = player(); 
                         obstacles.clear();
                         spawnClock.restart();
                     }
@@ -40,7 +42,9 @@ int main() {
         }
 
         if (!isDead) {
+            background.update(dt); 
             crow.update(dt);
+            
             if (spawnClock.getElapsedTime().asSeconds() > 2.0f) {
                 float randomY = 200.f + static_cast<float>(rand() % 600);
                 obstacles.emplace_back(2000.f, randomY, statueTex);
@@ -61,6 +65,9 @@ int main() {
         }
 
         window.clear(sf::Color(20, 20, 30));
+
+        background.draw(window); 
+
         for (auto& obs : obstacles) {
             obs.draw(window);
             obs.drawDebug(window);
