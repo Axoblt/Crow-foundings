@@ -10,7 +10,7 @@ Background_scroll::Background_scroll() : bgSpeed(150.f), offset(0.f) {
     bgTex.setRepeated(true);
 
     //(taille de la fenêtre)
-    bgShape.setSize({ 1920.f, 4020.f });
+    bgShape.setSize({ 4020.f, 4400.f });
     bgShape.setTexture(&bgTex);
 }
 
