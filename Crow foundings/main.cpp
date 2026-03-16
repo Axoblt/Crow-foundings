@@ -20,13 +20,15 @@ int main() {
     sf::Clock dtClock;
     bool isDead = false;
 
-    while (window.isOpen()) {
+    while (window.isOpen()) 
+    {
         float dt = dtClock.restart().asSeconds();
 
         while (const std::optional event = window.pollEvent()) {
             if (event->is<sf::Event::Closed>()) window.close();
 
-            if (!isDead) {
+            if (!isDead) 
+            {
                 crow.handleEvent(*event);
             }
             else {

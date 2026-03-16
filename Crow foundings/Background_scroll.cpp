@@ -3,14 +3,14 @@
 
 Background_scroll::Background_scroll() : bgSpeed(150.f), offset(0.f) {
     
-    if (!bgTex.loadFromFile("Assets/Background_1.png")) {
+    if (!bgTex.loadFromFile("Assets/Background_2.png")) {
         std::cerr << "Erreur : Background_1.png introuvable" << std::endl;
     }
 
     bgTex.setRepeated(true);
 
-    //(taille de la fenêtre)
-    bgShape.setSize({ 4020.f, 4400.f });
+    //(horizontale/vertical)
+    bgShape.setSize({ 5020.f, 4000.f });
     bgShape.setTexture(&bgTex);
 }
 
