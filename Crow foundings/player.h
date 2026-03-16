@@ -28,14 +28,19 @@ public:
 
     sf::FloatRect getBounds() const {
         if (sprite) {
-            sf::FloatRect rect = sprite->getGlobalBounds();
+            sf::FloatRect local = sprite->getLocalBounds();
 
+
+            float scale = 0.08f;
             float reduction = 0.28f;
 
-            sf::Vector2f newSize(rect.size.x * (1.0f - reduction * 2), rect.size.y * (1.0f - reduction * 2));
-            sf::Vector2f newPos(rect.position.x + (rect.size.x * reduction), rect.position.y + (rect.size.y * reduction));
 
-            return { newPos, newSize };
+            sf::Vector2f size(local.size.x * scale * (1.0f - reduction * 2),
+                local.size.y * scale * (1.0f - reduction * 2));
+
+            sf::Vector2f pos(x - size.x / 2.f, y - size.y / 2.f);
+
+            return { pos, size };
         }
         return sf::FloatRect({ 0, 0 }, { 0, 0 });
     }
