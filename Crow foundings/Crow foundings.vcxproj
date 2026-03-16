@@ -80,11 +80,13 @@
   <ItemGroup>
     <ClCompile Include="Background_scroll.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="obstacle.cpp" />
     <ClCompile Include="player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Background_scroll.h" />
+    <ClInclude Include="menu.h" />
     <ClInclude Include="obstacle.h" />
     <ClInclude Include="player.h" />
   </ItemGroup>
