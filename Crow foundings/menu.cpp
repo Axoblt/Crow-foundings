@@ -17,15 +17,15 @@ Menu::Menu(float width, float height) {
 
 
     centerOriginAndScale(*sprTitle, 0.3f);
-    centerOriginAndScale(*sprStart, 0.10f);
-    centerOriginAndScale(*sprSettings, 0.10f);
+    centerOriginAndScale(*sprStart, 0.12f);
+    centerOriginAndScale(*sprSettings, 0.08f);
 
-    centerOriginAndScale(*sprExit, 0.10f);
+    centerOriginAndScale(*sprExit, 0.05f);
     centerOriginAndScale(*sprGameOver, 0.3f);
 
-    sprTitle->setPosition({ width / 2.f, height * 0.25f });
-    sprStart->setPosition({ width / 2.f, height * 0.58f });
-    sprSettings->setPosition({ width / 2.f, height * 0.70f });
+    sprTitle->setPosition({ width / 2.f, height * 0.30f });
+    sprStart->setPosition({ width / 2.f, height * 0.62f });
+    sprSettings->setPosition({ width / 2.f, height * 0.75f });
     sprExit->setPosition({ width / 2.f, height * 0.85f });
     sprGameOver->setPosition({ width / 2.f, height / 2.f });
 }
