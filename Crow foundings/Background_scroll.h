@@ -1,8 +1,8 @@
-#pragma once
 #ifndef BACKGROUND_SCROLL_H
 #define BACKGROUND_SCROLL_H
 
 #include <SFML/Graphics.hpp>
+#include <array>
 
 class Background_scroll {
 public:
@@ -11,10 +11,10 @@ public:
     void draw(sf::RenderTarget& target) const;
 
 private:
-    sf::Texture bgTex;
-    sf::RectangleShape bgShape;
-    float bgSpeed;
-    float offset;  
+    std::array<sf::Texture, 4> textures;
+    std::array<sf::RectangleShape, 4> shapes;
+    std::array<float, 4> speeds;
+    std::array<float, 4> offsets;
 };
 
 #endif
