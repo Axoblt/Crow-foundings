@@ -13,36 +13,36 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Fichiers sources\Entity">
-      <UniqueIdentifier>{86607315-b34d-4107-a5d7-654082ce5ccf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\Entity">
-      <UniqueIdentifier>{b080c1a4-746f-4168-9dfd-427087ee3e56}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\Obstacle">
-      <UniqueIdentifier>{f0589d09-d2ee-40f7-bed4-1cf55a6a4bf0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Obstacle">
-      <UniqueIdentifier>{1f1587ec-5c6a-4ed8-912d-b9a882696e16}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>Fichiers sources\Entity</Filter>
+    <ClCompile Include="Background_scroll.cpp">
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="obstacle.cpp">
-      <Filter>Fichiers sources\Obstacle</Filter>
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="player.h">
-      <Filter>Fichiers d%27en-tête\Entity</Filter>
+    <ClInclude Include="Background_scroll.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="obstacle.h">
-      <Filter>Fichiers d%27en-tête\Obstacle</Filter>
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
