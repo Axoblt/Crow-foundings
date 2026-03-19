@@ -1,29 +1,38 @@
 #include "obstacle.h"
 
-const float GAP_SIZE = 100.f;
 
-obstacle::obstacle(float startX, float gapY, const sf::Texture& texture)
-    : topSprite(texture), bottomSprite(texture), x(startX), gapY(gapY) {
+obstacle::obstacle(float x, float gapY, float gapSize, const sf::Texture& topTex, const sf::Texture& botTex, float scale)
+    : topSprite(topTex), bottomSprite(botTex) 
+{
 
-    topSprite.setScale({ 0.3f, 0.5f });
-    bottomSprite.setScale({ 0.3f, 0.5f });
+    topSprite.setScale({ scale, scale });
+    topSprite.setOrigin({ (float)topTex.getSize().x / 2.f, (float)topTex.getSize().y });
+    topSprite.setPosition({ x, gapY - (gapSize / 2.f) });
 
-  
-    float spriteHeight = topSprite.getGlobalBounds().size.y;
-
-    topSprite.setPosition({ x, gapY - (GAP_SIZE / 2.f) - spriteHeight });
-    bottomSprite.setPosition({ x, gapY + (GAP_SIZE / 2.f) });
+    bottomSprite.setScale({ scale, scale });
+    bottomSprite.setOrigin({ (float)botTex.getSize().x / 2.f, 0.f });
+    bottomSprite.setPosition({ x, gapY + (gapSize / 2.f) });
 }
 
 void obstacle::update(float dt) {
-    x -= speed * dt;
-    float spriteHeight = topSprite.getGlobalBounds().size.y;
-
-    topSprite.setPosition({ x, -50.f });
-
-    bottomSprite.setPosition({ x, 1080.f - spriteHeight + 50.f });
+    float moveX = -speed * dt;
+    topSprite.move({ moveX, 0.f });
+    bottomSprite.move({ moveX, 0.f });
 }
-void obstacle::draw(sf::RenderTarget& target) const {
-    target.draw(topSprite);
-    target.draw(bottomSprite);
+
+void obstacle::draw(sf::RenderWindow& window) const {
+    window.draw(topSprite);
+    window.draw(bottomSprite);
+}
+
+bool obstacle::isOffScreen() const {
+    return topSprite.getPosition().x < -200.f;
+}
+
+sf::FloatRect obstacle::getTopBounds() const {
+    return topSprite.getGlobalBounds();
+}
+
+sf::FloatRect obstacle::getBottomBounds() const {
+    return bottomSprite.getGlobalBounds();
 }
