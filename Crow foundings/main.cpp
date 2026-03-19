@@ -47,7 +47,7 @@ int main() {
     float gapSize = 250.f;     
     float obstacleScale = 0.5f; 
 
-    while (window.isOpen()) {
+  
     while (window.isOpen()) 
     {
         float dt = dtClock.restart().asSeconds();
