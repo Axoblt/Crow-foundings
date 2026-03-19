@@ -6,9 +6,11 @@ obstacle::obstacle(float x, float gapY, float gapSize, const sf::Texture& topTex
     topSprite.setOrigin({ (float)topTex.getSize().x / 2.f, (float)topTex.getSize().y });
     topSprite.setPosition({ x, gapY - (gapSize / 2.f) });
 
+
     bottomSprite.setScale({ scale, scale });
     bottomSprite.setOrigin({ (float)botTex.getSize().x / 2.f, 0.f });
     bottomSprite.setPosition({ x, gapY + (gapSize / 2.f) });
+
 }
 
 void obstacle::update(float dt) {

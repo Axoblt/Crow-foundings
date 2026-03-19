@@ -41,9 +41,6 @@ int main() {
     float obstacleScale = 0.5f; 
 
   
-    while (window.isOpen()) 
-    {
-        float dt = dtClock.restart().asSeconds();
 
     while (window.isOpen()) {
         while (const std::optional event = window.pollEvent()) {
