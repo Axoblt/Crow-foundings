@@ -1,12 +1,12 @@
 #include "menu.h"
 
 Menu::Menu(float width, float height) {
-    // Chargement (vérifie tes extensions .jpg vs .png !)
-    texTitle.loadFromFile("Assets/Raven_Soul_Title.png");
-    texStart.loadFromFile("Assets/Start_Button.png");
-    texSettings.loadFromFile("Assets/Settings_Button.png");
-    texExit.loadFromFile("Assets/Exit_Button.png");
-    texGameOver.loadFromFile("Assets/Game_Over_Panel.png");
+
+    texTitle.loadFromFile("Assets/Menu/Raven_Soul_Title.png");
+    texStart.loadFromFile("Assets/Menu/Start_Button.png");
+    texSettings.loadFromFile("Assets/Menu/Settings_Button.png");
+    texExit.loadFromFile("Assets/Menu/Exit_Button.png");
+    texGameOver.loadFromFile("Assets/Menu/Game_Over_Panel.png");
 
     sprTitle = std::make_unique<sf::Sprite>(texTitle);
     sprStart = std::make_unique<sf::Sprite>(texStart);

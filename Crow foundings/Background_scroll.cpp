@@ -3,7 +3,7 @@
 
 Background_scroll::Background_scroll() : bgSpeed(150.f), offset(0.f) {
     
-    if (!bgTex.loadFromFile("Assets/Background_1.png")) {
+    if (!bgTex.loadFromFile("Assets/background/Background_1.png")) {
         std::cerr << "Erreur : Background_1.png introuvable" << std::endl;
     }
 
