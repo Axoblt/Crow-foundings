@@ -1,10 +1,7 @@
 #include "obstacle.h"
 
-
 obstacle::obstacle(float x, float gapY, float gapSize, const sf::Texture& topTex, const sf::Texture& botTex, float scale)
-    : topSprite(topTex), bottomSprite(botTex) 
-{
-
+    : topSprite(topTex), bottomSprite(botTex) {
     topSprite.setScale({ scale, scale });
     topSprite.setOrigin({ (float)topTex.getSize().x / 2.f, (float)topTex.getSize().y });
     topSprite.setPosition({ x, gapY - (gapSize / 2.f) });
@@ -15,9 +12,8 @@ obstacle::obstacle(float x, float gapY, float gapSize, const sf::Texture& topTex
 }
 
 void obstacle::update(float dt) {
-    float moveX = -speed * dt;
-    topSprite.move({ moveX, 0.f });
-    bottomSprite.move({ moveX, 0.f });
+    topSprite.move({ -speed * dt, 0.f });
+    bottomSprite.move({ -speed * dt, 0.f });
 }
 
 void obstacle::draw(sf::RenderWindow& window) const {
@@ -25,14 +21,6 @@ void obstacle::draw(sf::RenderWindow& window) const {
     window.draw(bottomSprite);
 }
 
-bool obstacle::isOffScreen() const {
-    return topSprite.getPosition().x < -200.f;
-}
-
-sf::FloatRect obstacle::getTopBounds() const {
-    return topSprite.getGlobalBounds();
-}
-
-sf::FloatRect obstacle::getBottomBounds() const {
-    return bottomSprite.getGlobalBounds();
-}
+bool obstacle::isOffScreen() const { return topSprite.getPosition().x < -300.f; }
+sf::FloatRect obstacle::getTopBounds() const { return topSprite.getGlobalBounds(); }
+sf::FloatRect obstacle::getBottomBounds() const { return bottomSprite.getGlobalBounds(); }
