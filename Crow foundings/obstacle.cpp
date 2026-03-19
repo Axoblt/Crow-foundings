@@ -1,44 +1,38 @@
 #include "obstacle.h"
 
-obstacle::obstacle(float startX, float gapSize, const sf::Texture& texTop, const sf::Texture& texBottom, float scale)
-    : x(startX)
+
+obstacle::obstacle(float x, float gapY, float gapSize, const sf::Texture& topTex, const sf::Texture& botTex, float scale)
+    : topSprite(topTex), bottomSprite(botTex) 
 {
-    // --- 1. LE HAUT (Taille fixe, touche le plafond, jamais étiré) ---
-    float displayWidth = static_cast<float>(texTop.getSize().x) * scale;
-    float displayHeightTop = static_cast<float>(texTop.getSize().y) * scale;
 
-    topShape.setSize({ displayWidth, displayHeightTop });
-    topShape.setTexture(&texTop);
-    topShape.setPosition({ x, 0.f }); // TOUCHE LE PLAFOND (Y = 0)
+    topSprite.setScale({ scale, scale });
+    topSprite.setOrigin({ (float)topTex.getSize().x / 2.f, (float)topTex.getSize().y });
+    topSprite.setPosition({ x, gapY - (gapSize / 2.f) });
 
-    // --- 2. LE BAS (S'ajuste pour créer l'écart) ---
-    // On calcule le début du pilier du bas : hauteur du haut + l'écart voulu
-    float bottomStart = displayHeightTop + gapSize;
-    float bottomHeight = 1080.f - bottomStart;
-
-    if (bottomHeight > 0) {
-        bottomShape.setSize({ displayWidth, bottomHeight });
-        bottomShape.setTexture(&texBottom);
-        bottomShape.setPosition({ x, bottomStart });
-
-        // On permet à la texture du bas de se répéter pour combler le vide sans s'étirer
-        const_cast<sf::Texture&>(texBottom).setRepeated(true);
-        bottomShape.setTextureRect(sf::IntRect(
-            { 0, 0 },
-            { static_cast<int>(texBottom.getSize().x), static_cast<int>(bottomHeight / scale) }
-        ));
-    }
+    bottomSprite.setScale({ scale, scale });
+    bottomSprite.setOrigin({ (float)botTex.getSize().x / 2.f, 0.f });
+    bottomSprite.setPosition({ x, gapY + (gapSize / 2.f) });
 }
 
 void obstacle::update(float dt) {
-    x -= speed * dt;
-    topShape.setPosition({ x, topShape.getPosition().y });
-    bottomShape.setPosition({ x, bottomShape.getPosition().y });
+    float moveX = -speed * dt;
+    topSprite.move({ moveX, 0.f });
+    bottomSprite.move({ moveX, 0.f });
 }
 
-void obstacle::draw(sf::RenderTarget& target) const {
-    target.draw(topShape);
-    if (bottomShape.getSize().y > 0) {
-        target.draw(bottomShape);
-    }
+void obstacle::draw(sf::RenderWindow& window) const {
+    window.draw(topSprite);
+    window.draw(bottomSprite);
+}
+
+bool obstacle::isOffScreen() const {
+    return topSprite.getPosition().x < -200.f;
+}
+
+sf::FloatRect obstacle::getTopBounds() const {
+    return topSprite.getGlobalBounds();
+}
+
+sf::FloatRect obstacle::getBottomBounds() const {
+    return bottomSprite.getGlobalBounds();
 }

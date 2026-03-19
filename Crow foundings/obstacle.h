@@ -2,20 +2,18 @@
 #include <SFML/Graphics.hpp>
 
 class obstacle {
-private:
-    sf::RectangleShape topShape;
-    sf::RectangleShape bottomShape;
-    float x;
-    static constexpr float speed = 350.f;
-
 public:
-    // Arguments : position X, taille du trou, texture haut, texture bas, échelle
-    obstacle(float startX, float gapSize, const sf::Texture& texTop, const sf::Texture& texBottom, float scale);
+    obstacle(float x, float gapY, float gapSize, const sf::Texture& topTex, const sf::Texture& botTex, float scale);
 
     void update(float dt);
-    void draw(sf::RenderTarget& target) const;
-    bool isOffScreen() const { return x < -500.f; }
+    void draw(sf::RenderWindow& window) const;
+    bool isOffScreen() const;
 
-    sf::FloatRect getTopBounds() const { return topShape.getGlobalBounds(); }
-    sf::FloatRect getBottomBounds() const { return bottomShape.getGlobalBounds(); }
+    sf::FloatRect getTopBounds() const;
+    sf::FloatRect getBottomBounds() const;
+
+private:
+    sf::Sprite topSprite;
+    sf::Sprite bottomSprite;
+    float speed = 350.f;
 };
