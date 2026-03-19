@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <SFML/Graphics.hpp>
 #include <memory>
 
@@ -11,8 +11,9 @@ public:
     GameState handleEvent(const sf::Event& event, sf::RenderWindow& window);
 
 private:
-    sf::Texture texTitle, texStart, texSettings, texShop, texExit, texGameOver;
-    std::unique_ptr<sf::Sprite> sprTitle, sprStart, sprSettings, sprShop, sprExit, sprGameOver;
+    sf::Texture texTitle, texStart, texSettings, texExit, texGameOver, texBackground;
+    std::unique_ptr<sf::Sprite> sprTitle, sprStart, sprSettings, sprExit, sprGameOver, sprBackground;
+
 
     void centerOriginAndScale(sf::Sprite& sprite, float scale);
 };
